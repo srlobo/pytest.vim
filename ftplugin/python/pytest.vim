@@ -633,6 +633,9 @@ function! s:ParseFailures(stdout)
                 let error.line = match_result[1]
                 let file_path = matchlist(w, '\v(.*.py):')
                 let error.path = file_path[1]
+                let match_result = matchlist(w, '\v:\d+:\d+: (.*)')
+                let error.exception = match_result[1]
+                let error.error = ""
             elseif w !~ file_regex
                 let match_result = matchlist(w, '\v:(\d+):')
                 let error.file_line = match_result[1]
